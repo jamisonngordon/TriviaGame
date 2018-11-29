@@ -7,6 +7,7 @@ var timeLeft;
 var questionsAnswered = 0;
 var questionsCorrect = 0;
 var questionsWrong = 0;
+var questionLoaded;
 
 $(document).ready(function () {
 
@@ -18,33 +19,48 @@ $(document).ready(function () {
 
 function startQuestion() {
 
-    $("#start-jumbotron").hide();
-    $("#questionResult").hide();
+    if(questionLoaded) {
 
-    question = questionObject.question;
+        $("#start-jumbotron").hide();
+        $("#questionResult").hide();
 
-    correctAnswer = questionObject.correct_answer;
+        question = questionObject.question;
 
-    answers = questionObject.incorrect_answers;
-    answers = deleteUndefined(answers);
-    answers.push(correctAnswer);
-    //this function chooses a random way to sort the questions from one of Array.sort()'s different methods
-    answers.sort(function() { return 0.5 - Math.random() });
+        correctAnswer = questionObject.correct_answer;
 
-    setQuestionFromData();
+        answers = questionObject.incorrect_answers;
+        answers = deleteUndefined(answers);
+        answers.push(correctAnswer);
+        //this function chooses a random way to sort the questions from one of Array.sort()'s different methods
+        answers.sort(function() { return 0.5 - Math.random() });
+
+        setQuestionFromData();
+    }
+    else {
+        var modal = $('#modal');
+        modal.find('.modal-header').html("The question isn't quite loaded yet!");
+        $('#modal').modal('show');
+    }
 }
 
 function restartGame () {
 
-    $("#endGame").hide();
-    $("#correctlyAnswered").hide();
-    $("#incorrectlyAnswered").hide();
-    $("#playAgain").hide();
-    
-    questionsAnswered = 0;
-    questionsCorrect = 0;
-    questionsWrong = 0;
-    startQuestion();
+    if(questionLoaded) {
+        $("#endGame").hide();
+        $("#correctlyAnswered").hide();
+        $("#incorrectlyAnswered").hide();
+        $("#playAgain").hide();
+        
+        questionsAnswered = 0;
+        questionsCorrect = 0;
+        questionsWrong = 0;
+        startQuestion();
+    }
+    else {
+        var modal = $('#modal');
+        modal.find('.modal-header').html("The question isn't quite loaded yet!");
+        $('#modal').modal('show');
+    }
 }
 
 function setQuestionFromData() {
@@ -78,8 +94,11 @@ function setQuestionFromData() {
 
 function getQuestion() {
 
+    questionLoaded = false;
+    
     $.get( "https://opentdb.com/api.php?amount=1&type=multiple", function(response) {
        questionObject = response.results[0];
+       questionLoaded = true;
     });
 
 }
