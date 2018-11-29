@@ -99,6 +99,12 @@ function decreaseTimer () {
 
     var milliseconds = [];
 
+    if(timeLeft === 0)
+    {
+        $("#time").html("0");
+        ranOutOfTime();
+    }
+
     timeLeft--;
 
     if(timeLeft > 1000)
