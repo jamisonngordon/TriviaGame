@@ -1,18 +1,53 @@
 <html>
+
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="assets/css/style.css">
     </head>
 
     <body>
         <div class="jumbotron" id="start-jumbotron">
             <h1 class="display-4">Welcome to Trivia!</h1>
             <p class="lead">A simple multiple choice trivia game. Make sure to answer each question within 10 seconds else you'll get it wrong.</p>
-            <a class="btn btn-primary btn-lg" onclick="startGame()" role="button">Start Game</a>
+            <a class="btn btn-primary btn-lg" onclick="startQuestion()" role="button">Start Game</a>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <h1 class="display-4 text-center hidden result-text mx-auto" id="questionResult"></h1>
+
+        <h1 class="display-3 text-center endGame hidden mx-auto" id="endGame">Good game! Here are the results: </h1>
+        <h1 class="display-4 text-center hidden mx-auto" id="correctlyAnswered"></h1>
+        <h1 class="display-4 text-center hidden mx-auto" id="incorrectlyAnswered"></h1>
+        <div class="text-center hidden" id="playAgain">
+            <button class="btn btn-primary mx-auto" onclick="restartGame()" role="button">Play Again</button>
+        </div>
+
+        <form id="questionForm" class="hidden col-6 mx-auto question-form">
+            <h1 id="time" class="text-center"></h1>
+            <h2 id="questionsLeft"></h2>
+            <h2 id="question"></h2>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="radio1" value="option1">
+                <label class="form-check-label" for="radio1" id="radio1Label"></label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
+                <label class="form-check-label" for="radio2" id="radio2Label"></label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="radio3" value="option2">
+                <label class="form-check-label" for="radio3" id="radio3Label"></label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option2">
+                <label class="form-check-label" for="radio4" id="radio4Label"></label>
+            </div>
+            <button type="button" role="button" class="btn btn-primary float-right" onclick="checkAnswer()">Submit</button>
+        </form>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="assets/js/app.js"></script>
+
     </body>
 </html>

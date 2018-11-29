@@ -1,0 +1,15 @@
+.hidden {
+    display: none;
+}
+
+.question-form {
+    margin-top: 100px;
+}
+
+.result-text {
+    margin-top: 20%;
+}
+
+.endGame {
+    margin-top: 150px;
+}
