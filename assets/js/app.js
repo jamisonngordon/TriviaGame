@@ -8,6 +8,7 @@ var questionsAnswered = 0;
 var questionsCorrect = 0;
 var questionsWrong = 0;
 var questionLoaded;
+var startTime;
 
 $(document).ready(function () {
 
@@ -84,8 +85,9 @@ function setQuestionFromData() {
         $("#radio3Label").html(answers[2]);
         $("#radio4Label").html(answers[3]);
     
-        timeLeft = 1000;
-        timerID = setInterval(decreaseTimer , 100);
+        // timeLeft = 1000;
+        startTime = Date.now();
+        timerID = setInterval(decreaseTimer , 1);
     
         $("#questionForm").show();
     }
@@ -116,17 +118,15 @@ function deleteUndefined(array) {
 
 function decreaseTimer () {
 
-    if(timeLeft === 0)
+    var elapsedTime = Date.now() - startTime;
+    var elapsedToReadable = (10 - (elapsedTime / 1000)).toFixed(1);
+    document.getElementById("time").innerHTML = elapsedToReadable;
+
+    if(elapsedToReadable <= 0)
     {
-        $("#time").html("0");
+        $("#time").html("10.0")
         ranOutOfTime();
     }
-
-    timeLeft -= 10;
-
-    var currentTime = timeLeft / 100;
-    document.getElementById("time").innerHTML = currentTime.toFixed(1);
-
 
 }
 
