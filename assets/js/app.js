@@ -68,8 +68,8 @@ function setQuestionFromData() {
         $("#radio3Label").html(answers[2]);
         $("#radio4Label").html(answers[3]);
     
-        timeLeft = 10000;
-        timerID = setInterval(decreaseTimer , 1);
+        timeLeft = 1000;
+        timerID = setInterval(decreaseTimer , 100);
     
         $("#questionForm").show();
     }
@@ -97,35 +97,17 @@ function deleteUndefined(array) {
 
 function decreaseTimer () {
 
-    var milliseconds = [];
-
     if(timeLeft === 0)
     {
         $("#time").html("0");
         ranOutOfTime();
     }
 
-    timeLeft--;
+    timeLeft -= 10;
 
-    if(timeLeft > 1000)
-    {
-        var splitTime = timeLeft.toString().split('');
+    var currentTime = timeLeft / 100;
+    document.getElementById("time").innerHTML = currentTime.toFixed(1);
 
-        milliseconds[0] = splitTime.pop();
-        milliseconds.push(splitTime.pop());
-        milliseconds.push(splitTime.pop());
-
-        milliseconds.reverse();
-        milliseconds = milliseconds.join('');
-
-        splitTime = splitTime.join('');
-
-        $("#time").html(splitTime + "." + milliseconds);
-    }
-    else
-    {
-        $("#time").html(timeLeft);
-    }
 
 }
 
